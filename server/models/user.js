@@ -8,7 +8,7 @@ let roles = {
 }
 
 let userSchema = new Schema({
-    email: {type:String, required:[true, 'El email es necesario']},
+    email: {type:String, unique:true, required:[true, 'El email es necesario']},
     name:{type:String, required:[true, 'El nombre es necesario']},
     password:{type:String, required:[true, 'La constraseña es necesaria']},
     image:{type:String, required:false},
@@ -17,6 +17,17 @@ let userSchema = new Schema({
 
 });
 
-userSchema.plugin(validator, {message:'{PATH} debe ser unico'})
+
+userSchema.methods.toJSON  = function(){
+    let user = this;
+    let userObject = user.toObject();
+    delete userObject.password;
+
+    return userObject;
+}
+
+userSchema.plugin(validator, {message:'{PATH} debe ser unico'});
+
+
 
 module.exports = mongoose.model('User', userSchema);
