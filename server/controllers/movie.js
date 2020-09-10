@@ -132,7 +132,10 @@ let listarPelicua = (req, res) =>{
     limite = Number(limite);
 
     //query:
-    Movie.find({status:true})
+    Movie.find( {
+                    category: {$regex : ".*.*"}, //contains
+                    status:true
+                } )
         .skip(inicio)
         .limit(limite)
         .exec((err, peliculas)=>{
@@ -166,10 +169,60 @@ let listarPelicua = (req, res) =>{
             });
         })
 }
+
+let eliminarPelicula = (req, res) =>{
+    //obtener id:
+    let id = req.params.id;
+
+    //cambiar el estado a false: no disponible
+    Movie.findByIdAndUpdate(id, {status:false}, (err, pelicula) =>{
+        if(err){
+            return res.status(500).json({
+                ok:false,
+                error:{
+                    message:'Ocurrio un error en EliminarPelicula',
+                    err:err
+                }
+            });
+        }
+
+        if(!pelicula){
+            return res.status(401).json({
+                ok:false,
+                error:{
+                    message:'No se econtro la pelicula',
+                    err:err
+                }
+
+            });
+        }
+
+        //solo se cambia el estado si esta true primero
+        if(pelicula.status == false){
+            return res.status(401).json({
+                ok:false,
+                error:{
+                    message:'No se econtro la pelicula (removida)',
+                }
+
+            });
+        }
+
+        return res.status(200).json({
+            ok:true,
+            pelicula:pelicula
+        });
+        
+
+    });
+
+
+}
 module.exports = {
     pruebaPelicula,
     registrarPelicula,
     actualizarPelicula,
     obtenerPelicula,
-    listarPelicua
+    listarPelicua,
+    eliminarPelicula
 }

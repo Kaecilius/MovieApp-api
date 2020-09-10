@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 //exportar rutas:
 const user_routes = require('./routes/user');
 const movie_routes = require('./routes/movie');
+const list_routes = require('./routes/list');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -22,6 +23,7 @@ app.get('/prueba',(req, res) =>{
 //rutas base:
 app.use('/api',user_routes);
 app.use('/api',movie_routes);
+app.use('/api',list_routes);
 
 
 module.exports = app;

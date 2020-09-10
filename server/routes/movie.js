@@ -2,6 +2,7 @@ const express = require('express');
 const md_auth = require('../middlewares/auntenticacion');
 const movieController = require('../controllers/movie');
 
+//iniciar router express:
 const api = express.Router();
 
 //ruta de prueba:
@@ -12,5 +13,7 @@ api.post('/registrar-pelicula',md_auth.verificarToken, movieController.registrar
 api.put('/actualizar-pelicula/:id', md_auth.verificarToken, movieController.actualizarPelicula );
 api.get('/pelicula/:id', md_auth.verificarToken, movieController.obtenerPelicula );
 api.get('/peliculas',md_auth.verificarToken, movieController.listarPelicua );
+api.delete('/remover-pelicula/:id',md_auth.verificarToken, movieController.eliminarPelicula );
 
+//exportar modulo:
 module.exports = api;

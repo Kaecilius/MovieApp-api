@@ -11,4 +11,13 @@ let movieSchema = new Schema({
     status:{type:Boolean, default:true}
 });
 
+
+movieSchema.methods.toJSON = function(){
+    let movie = this;
+    let movieObject = movie.toObject();
+
+    delete movieObject.status;
+
+    return movieObject;
+}
 module.exports = mongoose.model('Movie',movieSchema);

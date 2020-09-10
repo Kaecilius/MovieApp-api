@@ -15,7 +15,7 @@ let verificarToken = (req, res, next) =>{
 
             });
         }
-        console.log(decoded);
+
         //asignar en el req el objeto usuario
         req.usuario = decoded.usuario; //->nombre viene del payload en services
         next();
