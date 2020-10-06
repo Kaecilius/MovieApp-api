@@ -1,6 +1,7 @@
 const Movie = require('../models/movie');
 const _ = require('underscore');
 
+
 //funcion de prueba: 
 let pruebaPelicula = (req, res)=>{
     return res.status(200).json({
@@ -218,6 +219,7 @@ let eliminarPelicula = (req, res) =>{
 
 
 }
+
 module.exports = {
     pruebaPelicula,
     registrarPelicula,

@@ -5,11 +5,13 @@ const md_auth = require('../middlewares/auntenticacion');
 const api = express.Router();
 
 //ruta de prubas:
-api.get('/prueba-user', [md_auth.verificarToken, md_auth.verificarAdminRole], userController.pruebaUsuario);
+api.get('/testUsuario', [md_auth.verificarToken, md_auth.verificarAdminRole], userController.pruebaUsuario);
 
-//ruas:
-api.post('/registrar-usuario',userController.registrarUsuario);
+//create
+api.post('/usuario',userController.registrarUsuario);
+//read
 api.post('/login',userController.login);
-api.put('/actualizar-usuario/:id',md_auth.verificarToken, userController.registrarUsuario);
+//update
+api.put('/usuario/:id',md_auth.verificarToken, userController.registrarUsuario);
 
 module.exports = api;

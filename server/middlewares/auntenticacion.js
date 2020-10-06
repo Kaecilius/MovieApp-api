@@ -17,7 +17,7 @@ let verificarToken = (req, res, next) =>{
         }
 
         //asignar en el req el objeto usuario
-        req.usuario = decoded.usuario; //->nombre viene del payload en services
+        req.usuario = decoded.usuario; //-> nombre viene del payload en services
         next();
     });
 };
@@ -25,6 +25,7 @@ let verificarToken = (req, res, next) =>{
 
 //verificar Rol Adminstrador
 let verificarAdminRole = (req, res, next)=>{
+    
     //objeto usuario asignado al descifrar el token
     let usuario = req.usuario;
     if (usuario.role == 'ADMIN-ROLE'){

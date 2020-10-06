@@ -4,7 +4,7 @@ const port = process.env.port || 3000;
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/movieapp',
-                {useNewurlParser:true,useUnifiedTopology:true},
+                {useNewurlParser:true,useUnifiedTopology:true , useFindAndModify: false },
                 (err, res)=>{
                     if (err) throw err;
 

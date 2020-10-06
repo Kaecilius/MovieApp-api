@@ -5,7 +5,8 @@ let listSchema = new Schema({
     user:   { type:Schema.ObjectId, ref:'User', required: true   },
     name:   { type:String, required:    true    },
     public: { type:Boolean, default:    false   },
-    image:  { type:String, required:    false   }
+    image:  { type:String, required:    false   },
+    active: { type:String, default:     true    }
 });
 
 
